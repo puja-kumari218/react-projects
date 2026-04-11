@@ -24,82 +24,51 @@ const App = () => {
       style={{ backgroundColor: color }}
       className="min-h-screen flex flex-col items-center justify-center p-6 transition-colors duration-700"
     >
-      <div className="glass-card" style={{ textAlign: "center", maxWidth: "520px" }}>
+      <div className="bg-white/80 backdrop-blur-lg rounded-3xl border border-white shadow-lg p-10 w-full max-w-lg text-center">
 
-        {/* Header */}
-        <div style={{ fontSize: "2.6rem", marginBottom: "6px" }}>🎨</div>
-        <h1 className="title-gradient">Color Palette</h1>
-        <p className="subtitle-quote">✨ Paint your world with beautiful hues ✨</p>
+        <h1 className="font-bold text-3xl bg-gradient-to-br from-pink-500 to-violet-600 bg-clip-text text-transparent mb-1 leading-tight">
+          Color Palette
+        </h1>
+        <p className="text-xs text-pink-400 italic font-light mb-7 tracking-wide">
+          Paint your world with beautiful hues
+        </p>
 
-        <div className="cute-divider" />
+        <div className="w-14 h-1 bg-gradient-to-r from-pink-400 to-violet-400 rounded-full mx-auto my-4" />
 
         {/* Color Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "12px",
-            marginTop: "1.4rem",
-          }}
-        >
+        <div className="grid grid-cols-4 gap-3 mt-6">
           {colors.map((c) => (
             <button
               key={c.value}
-              className="swatch-btn"
+              className="rounded-2xl py-3.5 px-2 font-semibold text-xs cursor-pointer text-white transition-all hover:-translate-y-1 hover:scale-105 flex flex-col items-center"
               onClick={() => setColor(c.value)}
               style={{
                 backgroundColor: c.value,
                 boxShadow: `0 4px 14px ${c.value}70`,
               }}
             >
-              <span style={{ fontSize: "1.1rem" }}>●</span>
               {c.name}
             </button>
           ))}
         </div>
 
         {/* Active Color Display */}
-        <div
-          style={{
-            marginTop: "1.5rem",
-            padding: "12px 18px",
-            background: "rgba(255,255,255,0.7)",
-            borderRadius: "14px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "12px",
-          }}
-        >
+        <div className="mt-6 p-3 bg-white/70 rounded-2xl flex items-center justify-center gap-3">
           <div
-            style={{
-              width: "30px",
-              height: "30px",
-              borderRadius: "50%",
-              backgroundColor: color,
-              border: "3px solid white",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
-            }}
+            className="w-8 h-8 rounded-full border-4 border-white shadow-md shrink-0"
+            style={{ backgroundColor: color }}
           />
-          <span
-            style={{
-              fontFamily: "var(--font)",
-              color: "#6b21a8",
-              fontWeight: 600,
-              fontSize: "0.88rem",
-            }}
-          >
-            Active: <code style={{ letterSpacing: "1px" }}>{color}</code>
+          <span className="text-violet-800 font-semibold text-sm">
+            Active: <code className="tracking-widest">{color}</code>
           </span>
         </div>
 
         {/* Reset button */}
         <button
-          className="btn-outline"
+          className="mt-5 bg-transparent text-violet-700 border-2 border-violet-300 rounded-full px-7 py-2.5 font-semibold text-sm cursor-pointer transition-all hover:bg-violet-100 hover:border-violet-500 hover:-translate-y-0.5"
           onClick={() => setColor("#fdf2f8")}
-          style={{ marginTop: "1.2rem" }}
         >
-          🌸 Reset
+          Reset
         </button>
       </div>
     </div>

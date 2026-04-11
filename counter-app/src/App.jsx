@@ -1,14 +1,6 @@
 import React, { useState } from 'react'
 import Counter from './components/Counter'
 
-const getEmoji = (count) => {
-  if (count > 10) return '🎉';
-  if (count > 0)  return '🌸';
-  if (count === 0) return '✨';
-  if (count < -5) return '🌚';
-  return '💫';
-};
-
 const App = () => {
   const [count, setCount] = useState(0);
   const addValue    = () => setCount(count + 1);
@@ -16,43 +8,35 @@ const App = () => {
   const resetValue  = () => setCount(0);
 
   return (
-    <div className="page-wrapper">
-      <div className="glass-card" style={{ textAlign: "center" }}>
+    <div className="min-h-screen flex flex-col items-center justify-center p-8">
+      <div className="bg-white/80 backdrop-blur-lg rounded-3xl border border-white shadow-lg p-10 w-full max-w-md text-center">
 
-        <div style={{ fontSize: "2.5rem", marginBottom: "6px" }}>{getEmoji(count)}</div>
-        <h1 className="title-gradient">Counter</h1>
-        <p className="subtitle-quote">Every count is a tiny victory 💜</p>
+        <h1 className="font-bold text-3xl bg-gradient-to-br from-pink-500 to-violet-600 bg-clip-text text-transparent mb-1 leading-tight">
+          Counter
+        </h1>
+        <p className="text-xs text-pink-400 italic font-light mb-7 tracking-wide">
+          Every count is a tiny victory
+        </p>
 
-        <div className="cute-divider" />
+        <div className="w-14 h-1 bg-gradient-to-r from-pink-400 to-violet-400 rounded-full mx-auto my-4" />
 
         <Counter count={count} onAdd={addValue} onRemove={removeValue} />
 
-        {/* Reset */}
         <button
-          className="btn-outline"
+          className="mt-5 bg-transparent text-violet-700 border-2 border-violet-300 rounded-full px-7 py-2.5 font-semibold text-sm cursor-pointer transition-all hover:bg-violet-100 hover:border-violet-500 hover:-translate-y-0.5"
           onClick={resetValue}
-          style={{ marginTop: "1.2rem" }}
         >
-          🔄 Reset
+          Reset
         </button>
 
-        {/* Dynamic message */}
-        <p
-          style={{
-            marginTop: "1.2rem",
-            fontFamily: "var(--font)",
-            fontSize: "0.8rem",
-            color: "#c084fc",
-            fontStyle: "italic",
-          }}
-        >
+        <p className="mt-5 text-xs text-purple-300 italic">
           {count > 10
-            ? "Wow, you're on fire! 🎉"
+            ? "Wow, you're on fire!"
             : count > 0
-            ? `You've counted ${count} time${count !== 1 ? 's' : ''} 🌸`
+            ? `You've counted ${count} time${count !== 1 ? 's' : ''}`
             : count < 0
-            ? `${Math.abs(count)} below zero! 🌚`
-            : 'Start counting! ✨'}
+            ? `${Math.abs(count)} below zero!`
+            : 'Start counting!'}
         </p>
       </div>
     </div>

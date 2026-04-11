@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 
 function App() {
-  const [length, setLength]             = useState(8);
+  const [length, setLength]               = useState(8);
   const [numberAllowed, setNumberAllowed] = useState(false);
-  const [charAllowed, setCharAllowed]   = useState(false);
-  const [Password, setPassword]         = useState("");
-  const [copied, setCopied]             = useState(false);
+  const [charAllowed, setCharAllowed]     = useState(false);
+  const [Password, setPassword]           = useState("");
+  const [copied, setCopied]               = useState(false);
   const passwordRef = useRef(null);
 
   const passwordGenerator = useCallback(() => {
@@ -32,123 +32,90 @@ function App() {
   };
 
   return (
-    <div className="page-wrapper">
-      <div className="glass-card">
+    <div className="min-h-screen flex flex-col items-center justify-center p-8">
+      <div className="bg-white/80 backdrop-blur-lg rounded-3xl border border-white shadow-lg p-10 w-full max-w-md">
 
-        {/* Header */}
-        <div style={{ textAlign: "center", fontSize: "2.5rem", marginBottom: "6px" }}>🔐</div>
-        <h1 className="title-gradient">Password Generator</h1>
-        <p className="subtitle-quote">Your secrets are safe with me 💜</p>
+        <h1 className="font-bold text-3xl bg-gradient-to-br from-pink-500 to-violet-600 bg-clip-text text-transparent text-center mb-1 leading-tight">
+          Password Generator
+        </h1>
+        <p className="text-xs text-pink-400 text-center italic font-light mb-7 tracking-wide">
+          Your secrets are safe with me
+        </p>
 
-        <div className="cute-divider" />
+        <div className="w-14 h-1 bg-gradient-to-r from-pink-400 to-violet-400 rounded-full mx-auto my-4" />
 
         {/* Password display + copy */}
-        <div style={{ display: "flex", gap: "10px", marginBottom: "1.4rem", marginTop: "1rem" }}>
+        <div className="flex gap-2.5 mb-6 mt-4">
           <input
-            className="input-cute"
+            className="bg-white/90 border-2 border-violet-300 rounded-xl px-4 py-3 text-sm text-violet-900 w-full outline-none focus:border-pink-400 transition-all placeholder:text-violet-300 font-mono tracking-wider"
             type="text"
             value={Password}
             ref={passwordRef}
             readOnly
-            style={{ fontFamily: "monospace", letterSpacing: "1.5px", fontSize: "0.88rem" }}
           />
           <button
-            className="btn-cute"
+            className={`shrink-0 px-5 py-3 rounded-full font-semibold text-sm text-white transition-all shadow-lg hover:-translate-y-1 ${
+              copied
+                ? "bg-gradient-to-br from-emerald-400 to-green-600"
+                : "bg-gradient-to-br from-pink-400 to-violet-400"
+            }`}
             onClick={copyPassword}
-            style={{
-              flexShrink: 0,
-              padding: "12px 18px",
-              background: copied
-                ? "linear-gradient(135deg, #10b981, #059669)"
-                : undefined,
-            }}
           >
-            {copied ? "✓ Done!" : "Copy"}
+            {copied ? "Done!" : "Copy"}
           </button>
         </div>
 
         {/* Length Slider */}
-        <div style={{ marginBottom: "1.3rem" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "8px",
-            }}
-          >
-            <span className="label-cute">Password Length</span>
-            <span className="pill-badge">{length}</span>
+        <div className="mb-5">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-violet-700 uppercase tracking-widest">
+              Password Length
+            </span>
+            <span className="bg-gradient-to-br from-pink-400 to-violet-400 text-white rounded-2xl px-3.5 py-0.5 text-xs font-semibold">
+              {length}
+            </span>
           </div>
           <input
-            className="range-cute"
+            className="w-full cursor-pointer accent-pink-500"
             type="range"
             min={6}
             max={20}
             value={length}
             onChange={(e) => setLength(e.target.value)}
           />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              fontFamily: "var(--font)",
-              fontSize: "0.7rem",
-              color: "#c084fc",
-              marginTop: "4px",
-            }}
-          >
+          <div className="flex justify-between text-[0.7rem] text-purple-300 mt-1">
             <span>6</span>
             <span>20</span>
           </div>
         </div>
 
         {/* Options */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "1.4rem" }}>
-          <label style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}>
+        <div className="flex flex-col gap-3 mb-6">
+          <label className="flex items-center gap-3 cursor-pointer">
             <input
-              className="checkbox-cute"
+              className="w-5 h-5 rounded border-2 border-violet-300 cursor-pointer accent-pink-500"
               type="checkbox"
               onChange={() => setNumberAllowed(!numberAllowed)}
             />
-            <span
-              style={{
-                fontFamily: "var(--font)",
-                fontSize: "0.9rem",
-                color: "#5b21b6",
-                fontWeight: 500,
-              }}
-            >
-              Include Numbers 🔢
-            </span>
+            <span className="text-sm text-violet-800 font-medium">Include Numbers</span>
           </label>
 
-          <label style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}>
+          <label className="flex items-center gap-3 cursor-pointer">
             <input
-              className="checkbox-cute"
+              className="w-5 h-5 rounded border-2 border-violet-300 cursor-pointer accent-pink-500"
               type="checkbox"
               onChange={() => setCharAllowed(!charAllowed)}
             />
-            <span
-              style={{
-                fontFamily: "var(--font)",
-                fontSize: "0.9rem",
-                color: "#5b21b6",
-                fontWeight: 500,
-              }}
-            >
-              Include Symbols ✨
-            </span>
+            <span className="text-sm text-violet-800 font-medium">Include Symbols</span>
           </label>
         </div>
 
         {/* Regenerate */}
         <button
-          className="btn-cute"
+          className="w-full bg-gradient-to-br from-pink-400 to-violet-400 text-white rounded-full py-3 font-semibold text-sm cursor-pointer transition-all hover:-translate-y-1 shadow-lg"
           onClick={passwordGenerator}
-          style={{ width: "100%", justifyContent: "center" }}
         >
-          🔄 Generate New Password
+          Generate New Password
         </button>
 
       </div>
