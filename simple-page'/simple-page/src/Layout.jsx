@@ -1,19 +1,17 @@
-import React from 'react'
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import { Outlet } from 'react-router-dom'
-
-
-const Layout = () => {
+import React from "react";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import { Outlet } from "react-router-dom";
+function Layout() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <>
       <Header />
-      <main className="flex-1">
+      <main>
         <Outlet />
       </main>
       <Footer />
-    </div>
-  )
+    </>
+  );
 }
 
-export default Layout
+export default Layout;

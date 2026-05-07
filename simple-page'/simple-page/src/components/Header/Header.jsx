@@ -1,17 +1,16 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Header() {
   return (
-    <nav className="bg-blue-600 text-white px-8 py-4 flex gap-6 items-center shadow-md">
-      <span className="font-bold text-xl mr-auto">MyApp</span>
+    <nav className="p-9 bg-amber-50 text-amber-700">
+      <Link to="/" className="text-amber-700 mr-20">
+        MyApp
+      </Link>
       <NavLink
         to="/"
-        end
         className={({ isActive }) =>
-          isActive
-            ? "bg-white text-blue-600 px-4 py-2 rounded font-semibold"
-            : "hover:bg-blue-500 px-4 py-2 rounded"
+          isActive ? "text-amber-700 font-bold" : "text-gray-700"
         }
       >
         Home
@@ -19,32 +18,26 @@ function Header() {
       <NavLink
         to="/about"
         className={({ isActive }) =>
-          isActive
-            ? "bg-white text-blue-600 px-4 py-2 rounded font-semibold"
-            : "hover:bg-blue-500 px-4 py-2 rounded"
+          isActive ? "text-amber-700 font-bold" : "text-gray-700"
         }
       >
         About
       </NavLink>
       <NavLink
-        to="/contact"
-        className={({ isActive }) =>
-          isActive
-            ? "bg-white text-blue-600 px-4 py-2 rounded font-semibold"
-            : "hover:bg-blue-500 px-4 py-2 rounded"
-        }
-      >
-        Contact
-      </NavLink>
-      <NavLink
         to="/github"
         className={({ isActive }) =>
-          isActive
-            ? "bg-white text-blue-600 px-4 py-2 rounded font-semibold"
-            : "hover:bg-blue-500 px-4 py-2 rounded"
+          isActive ? "text-amber-700 font-bold" : "text-gray-700"
         }
       >
         Github
+      </NavLink>
+      <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+          isActive ? "text-amber-700 font-bold" : "text-gray-700"
+        }
+      >
+        Contact
       </NavLink>
     </nav>
   );
